@@ -52,6 +52,12 @@ export async function POST(request: Request) {
     const tx = await program.methods.vote(
         new anchor.BN(1),
         "smooth",
-    )
+    ).accounts(
+            {
+                pollAccount: pollAddress,
+                candidateAccount: firstCandidateAddress,
+            }
+        
+)
     return Response.json({}, {headers: ACTIONS_CORS_HEADERS});
 }
