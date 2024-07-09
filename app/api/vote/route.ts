@@ -40,6 +40,9 @@ export async function POST(request: Request) {
 
     let url = new URL(request.url);
     const vote = url.searchParams.get('candidate') as string;
+    if (vote !== 'crunchy' && vote !== 'smooth') {
+        return Response.json({error: 'You voted for the wrong candidate'}, {status:400, headers: ACTIONS_CORS_HEADERS});
+    }
 
     const [firstCandidateAddress] = PublicKey.findProgramAddressSync(
         [pollIdBuffer, Buffer.from(url.searchParams.get('candidate') as string)],
