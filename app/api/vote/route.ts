@@ -1,4 +1,4 @@
-import { ActionGetResponse } from "@solana/actions";
+import { ACTIONS_CORS_HEADERS, ActionGetResponse } from "@solana/actions";
 
 export const OPTIONS = GET;
 
@@ -21,4 +21,8 @@ export async function GET(request: Request) {
         }
     };
     return Response.json(response, {headers: {'Access-Control-Allow-Origin': '*'}});
+}
+
+export async function POST(request: Request) {
+    return Response.json({}, {headers: ACTIONS_CORS_HEADERS});
 }
